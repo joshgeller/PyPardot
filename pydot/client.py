@@ -35,13 +35,15 @@ class Client():
 
     def _post(self, object, path=None, params={}):
         """
-        Makes a POST request to the API. Checks for errors and returns the JSON response, if any.
+        Makes a POST request to the API. Checks for invalid requests that raise PardotAPIErrors.
+        If no errors are raised, returns either the JSON, or if no JSON was returned, returns the HTTP response status
+        code.
         """
         params.update({'user_key': self.user_key, 'api_key': self.api_key, 'format': 'json'})
         try:
             #print('\n\nPOST parameters:\n\n{}'.format(params))
             request = requests.post(self._full_path(object, path), params=params)
-            response = self._check_response(request.json())
+            response = self._check_response(request)
             return response
         except PardotAPIError, err:
             print(err)
@@ -49,27 +51,34 @@ class Client():
 
     def _get(self, object, path=None, params={}):
         """
-        Makes a GET request to the API. Checks for errors and returns the JSON response, if any.
+        Makes a GET request to the API. Checks for invalid requests that raise PardotAPIErrors.
+        If no errors are raised, returns either the JSON, or if no JSON was returned, returns the HTTP response status
+        code.
         """
         params.update({'user_key': self.user_key, 'api_key': self.api_key, 'format': 'json'})
         try:
             request = requests.get(self._full_path(object, path), params=params)
-            response = self._check_response(request.json())
+            response = self._check_response(request)
             return response
         except PardotAPIError, err:
             print(err)
 
+    def _check_response(self, response):
+        """
+        Checks the HTTP <response> to see if it contains JSON. If it does, checks the JSON for error codes and messages.
+        Raises PardotAPIError if an error was found. If no error was found, returns the JSON.
+        If JSON was not found, returns the response status code.
+        """
+        if response.headers.get('content-type') == 'application/json':
+            json = response.json()
+            for keys in json:
+                error = json.get('err')
+                if error:
+                    raise PardotAPIError(json)
+            return json
+        else:
+            return response.status_code
 
-    def _check_response(self, json_response):
-        """
-        Checks JSON response to see if there was an error. Raises PardotAPIError if an error was found.
-        Returns the full JSON response.
-        """
-        for keys in json_response:
-            error = json_response.get('err')
-            if error:
-                raise PardotAPIError(json_response)
-        return json_response
 
     def authenticate(self):
         """
