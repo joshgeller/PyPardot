@@ -7,25 +7,30 @@ class Emails():
     def __init__(self, client):
         self.client = client
 
-    def send(self, **kwargs):
-        """
-        Sends a one-to-one email to the given prospect email, prospect ID, or list IDs
-        Supported parameters: http://developer.pardot.com/kb/api-version-3/sending-one-to-one-emails#supported-parameters-
-        """
-        if 'prospect_email' in kwargs:
-            path = '/do/send/prospect_email/{prospect_email}'.format(prospect_email=kwargs.get('prospect_email'))
-        elif 'prospect_id' in kwargs:
-            path = '/do/send/prospect_id/{prospect_id}'.format(prospect_id=kwargs.get('id'))
-        else:
-            path = '/do/send'
-        result = self._post(path=path, params=kwargs)
+    def send_to_email(self, prospect_email=None, **kwargs):
+        """Sends an email to the prospect identified by <prospect_email>"""
+        kwargs['prospect_email'] = prospect_email
+        result = self._post(
+            path='/do/send/prospect_email/{prospect_email}'.format(prospect_email=kwargs.get('prospect_email')),
+            params=kwargs)
+        return result
+
+    def send_to_id(self, prospect_id=None, **kwargs):
+        """Sends an email to the prospect identified by <prospect_id>"""
+        kwargs['prospect_id'] = prospect_id
+        result = self._post(
+            path='/do/send/prospect_id/{prospect_id}'.format(prospect_id=kwargs.get('prospect_id')), params=kwargs)
+        return result
+
+    def send_to_lists(self, list_ids=None, **kwargs):
+        """Sends an email to the lists identified by <list_ids>"""
+        kwargs['list_ids'] = list_ids
+        result = self._post(
+            path='/do/send/', params=kwargs)
         return result
 
     def read(self, id):
-        """
-        Returns the data for the email specified by id.
-        id is the Pardot ID of the target email.
-        """
+        """Returns the data for the email specified by <id>. <id> is the Pardot ID of the target email."""
         result = self._get(path='/do/read/id/{id}'.format(id=id))
         return result
 
