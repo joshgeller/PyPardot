@@ -16,15 +16,3 @@ class PardotAPIError(Exception):
     def __str__(self):
         #print('Raw JSON error response: {}'.format(self.response))
         return 'Error {err_code}: {message}'.format(err_code=self.err_code, message=self.message)
-
-
-class PydotError(Exception):
-    """
-    Exception class used by the Pydot wrapper for incorrectly formatted inputs, etc.
-    """
-
-    def __init__(self, message):
-        self.message = message
-
-    def __str__(self):
-        return repr(self.message)
