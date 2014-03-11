@@ -11,15 +11,13 @@ class Lists():
         """
         Returns the lists matching the specified criteria parameters.
         Supported search parameters: http://developer.pardot.com/kb/api-version-3/querying-lists
-        ex: client.Lists.query(created_after='yesterday', limit=100)
         """
         result = self._get(path='/do/query', params=kwargs)
         return result
 
-    def read(self, id):
+    def read(self, id=None):
         """
-        Returns the data for the list specified by id
-        id is the Pardot ID of the target list
+        Returns the data for the list specified by <id>.<id> is the Pardot ID of the target list.
         """
         result = self._get(path='/do/read/id/{id}'.format(id=id))
         return result
