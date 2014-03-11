@@ -7,7 +7,7 @@ from objects.accounts import Accounts
 from objects.users import Users
 from objects.visits import Visits
 from objects.visitors import Visitors
-from objects.visitoractivity import VisitorActivity
+from objects.visitoractivities import VisitorActivities
 
 from errors import PardotAPIError
 
@@ -35,7 +35,7 @@ class Client():
         self.Users = Users(self)
         self.Visits = Visits(self)
         self.Visitors = Visitors(self)
-        self.VisitorActivity = VisitorActivity(self)
+        self.VisitorActivities = VisitorActivities(self)
 
     def _full_path(self, object, path=None, version='3'):
         """Builds the full path for the API request"""
