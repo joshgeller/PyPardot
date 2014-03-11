@@ -6,6 +6,7 @@ from objects.opportunities import Opportunities
 from objects.accounts import Accounts
 from objects.users import Users
 from objects.visits import Visits
+from objects.visitors import Visitors
 
 from errors import PardotAPIError
 
@@ -25,7 +26,6 @@ class Client():
         self.password = password
         self.user_key = user_key
         self.api_key = None
-
         self.Lists = Lists(self)
         self.Emails = Emails(self)
         self.Prospects = Prospects(self)
@@ -33,6 +33,7 @@ class Client():
         self.Accounts = Accounts(self)
         self.Users = Users(self)
         self.Visits = Visits(self)
+        self.Visitors = Visitors(self)
 
     def _full_path(self, object, path=None, version='3'):
         """Builds the full path for the API request"""
