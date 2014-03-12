@@ -4,6 +4,9 @@ class Opportunities():
     Opportunity field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#opportunity
     """
 
+    def __init__(self, client):
+        self.client = client
+
     def query(self, **kwargs):
         """
         Returns the opportunities matching the specified criteria parameters.
