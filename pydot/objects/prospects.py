@@ -11,7 +11,6 @@ class Prospects():
         """
         Returns the prospects matching the specified criteria parameters.
         Supported search parameters: http://developer.pardot.com/kb/api-version-3/querying-prospects#supported-search-criteria
-        ex: client.Prospects.query(created_after='yesterday', assigned='false', limit=100)
         """
         result = self._get(path='/do/query', params=kwargs)
         return result
