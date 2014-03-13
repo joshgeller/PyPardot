@@ -37,7 +37,7 @@ class Client():
         self.Visitors = Visitors(self)
         self.VisitorActivities = VisitorActivities(self)
 
-    def _post(self, object, path=None, params=None, retries=0):
+    def post(self, object, path=None, params=None, retries=0):
         """
         Makes a POST request to the API. Checks for invalid requests that raise PardotAPIErrors. If the API key is
         invalid, one re-authentication request is made, in case the key has simply expired. If no errors are raised,
@@ -57,7 +57,7 @@ class Client():
             else:
                 print(err)
 
-    def _get(self, object, path=None, params=None, retries=0):
+    def get(self, object, path=None, params=None, retries=0):
         """
         Makes a GET request to the API. Checks for invalid requests that raise PardotAPIErrors. If the API key is
         invalid, one re-authentication request is made, in case the key has simply expired. If no errors are raised,
@@ -121,7 +121,7 @@ class Client():
          False if authentication fails.
         """
         try:
-            auth = self._post('login', params={'email': self.email, 'password': self.password})
+            auth = self.post('login', params={'email': self.email, 'password': self.password})
             self.api_key = auth.get('api_key')
             if self.api_key is not None:
                 return True

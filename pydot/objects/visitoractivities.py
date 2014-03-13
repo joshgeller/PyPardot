@@ -27,13 +27,13 @@ class VisitorActivities():
         """GET requests for the Visitor Activity object"""
         if params is None:
             params = {}
-        result = self.client._get(object='visitorActivity', path=path, params=params)
+        result = self.client.get(object='visitorActivity', path=path, params=params)
         return result
 
     def _post(self, path=None, params=None):
         """POST requests for the Visitor Activity object"""
         if params is None:
             params = {}
-        result = self.client._post(object='visitorActivity', path=path, params=params)
+        result = self.client.post(object='visitorActivity', path=path, params=params)
         return result
 

@@ -33,13 +33,13 @@ class Users():
         """GET requests for the User object"""
         if params is None:
             params = {}
-        result = self.client._get(object='user', path=path, params=params)
+        result = self.client.get(object='user', path=path, params=params)
         return result
 
     def _post(self, path=None, params=None):
         """POST requests for the User object"""
         if params is None:
             params = {}
-        result = self.client._post(object='user', path=path, params=params)
+        result = self.client.post(object='user', path=path, params=params)
         return result
 

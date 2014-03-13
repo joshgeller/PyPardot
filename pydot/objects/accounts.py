@@ -45,14 +45,14 @@ class Accounts():
         """GET requests for the Account object"""
         if params is None:
             params = {}
-        result = self.client._get(object='prospectAccount', path=path, params=params)
+        result = self.client.get(object='prospectAccount', path=path, params=params)
         return result
 
     def _post(self, path=None, params=None):
         """POST requests for the Account object"""
         if params is None:
             params = {}
-        result = self.client._post(object='prospectAccount', path=path, params=params)
+        result = self.client.post(object='prospectAccount', path=path, params=params)
         return result
 
 

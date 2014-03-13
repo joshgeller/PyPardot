@@ -35,13 +35,13 @@ class Visitors():
         """GET requests for the Visitor object"""
         if params is None:
             params = {}
-        result = self.client._get(object='visitor', path=path, params=params)
+        result = self.client.get(object='visitor', path=path, params=params)
         return result
 
     def _post(self, path=None, params=None):
         """POST requests for the Visitor object"""
         if params is None:
             params = {}
-        result = self.client._post(object='visitor', path=path, params=params)
+        result = self.client.post(object='visitor', path=path, params=params)
         return result
 

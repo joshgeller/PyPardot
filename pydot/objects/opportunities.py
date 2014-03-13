@@ -76,12 +76,12 @@ class Opportunities():
         """GET requests for the Opportunity object"""
         if params is None:
             params = {}
-        result = self.client._get(object='opportunity', path=path, params=params)
+        result = self.client.get(object='opportunity', path=path, params=params)
         return result
 
     def _post(self, path=None, params=None):
         """POST requests for the Opportunity object"""
         if params is None:
             params = {}
-        result = self.client._post(object='opportunity', path=path, params=params)
+        result = self.client.post(object='opportunity', path=path, params=params)
         return result
