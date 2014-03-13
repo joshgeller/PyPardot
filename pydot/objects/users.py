@@ -29,13 +29,17 @@ class Users():
         result = self._post(path='/do/read/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
         return result
 
-    def _get(self, path=None, params={}):
+    def _get(self, path=None, params=None):
         """GET requests for the User object"""
+        if params is None:
+            params = {}
         result = self.client._get(object='user', path=path, params=params)
         return result
 
-    def _post(self, path=None, params={}):
+    def _post(self, path=None, params=None):
         """POST requests for the User object"""
+        if params is None:
+            params = {}
         result = self.client._post(object='user', path=path, params=params)
         return result
 
