@@ -37,34 +37,37 @@ class Client():
         self.Visitors = Visitors(self)
         self.VisitorActivities = VisitorActivities(self)
 
-    def _full_path(self, object, path=None, version='3'):
+    def _full_path(self, object, path=None, version=3):
         """Builds the full path for the API request"""
         full = '{0}/api/{1}/version/{2}'.format(BASE_URI, object, version)
         if path:
             return full + '/{0}'.format(path)
         return full
 
-    def _post(self, object, path=None, params={}):
+    def _post(self, object, path=None, params={}, retries=0):
         """
-        Makes a POST request to the API. Checks for invalid requests that raise PardotAPIErrors.
-        If no errors are raised, returns either the JSON, or if no JSON was returned, returns the HTTP response status
-        code.
+        Makes a POST request to the API. Checks for invalid requests that raise PardotAPIErrors. If the API key is
+        invalid, one re-authentication request is made, in case the key has simply expired. If no errors are raised,
+        returns either the JSON response, or if no JSON was returned, returns the HTTP response status code.
         """
         params.update({'user_key': self.user_key, 'api_key': self.api_key, 'format': 'json'})
         try:
-            #print('\n\nPOST parameters:\n\n{}'.format(params))
             request = requests.post(self._full_path(object, path), params=params)
             response = self._check_response(request)
             return response
         except PardotAPIError, err:
-            print(err)
+            if err.message == 'Invalid API key or user key':
+                response = self._handle_expired_api_key(err, retries, '_post', object, path, params)
+                return response
+            else:
+                print(err)
 
 
-    def _get(self, object, path=None, params={}):
+    def _get(self, object, path=None, params={}, retries=0):
         """
-        Makes a GET request to the API. Checks for invalid requests that raise PardotAPIErrors.
-        If no errors are raised, returns either the JSON, or if no JSON was returned, returns the HTTP response status
-        code.
+        Makes a GET request to the API. Checks for invalid requests that raise PardotAPIErrors. If the API key is
+        invalid, one re-authentication request is made, in case the key has simply expired. If no errors are raised,
+        returns either the JSON response, or if no JSON was returned, returns the HTTP response status code.
         """
         params.update({'user_key': self.user_key, 'api_key': self.api_key, 'format': 'json'})
         try:
@@ -72,20 +75,37 @@ class Client():
             response = self._check_response(request)
             return response
         except PardotAPIError, err:
-            print(err)
+            if err.message == 'Invalid API key or user key':
+                response = self._handle_expired_api_key(err, retries, '_get', object, path, params)
+                return response
+            else:
+                print(err)
+
+    def _handle_expired_api_key(self, err, retries, method, object, path, params):
+        """
+        Tries to refresh an expired API key and re-issue the HTTP request. If the refresh has already been attempted,
+        an error is raised.
+        """
+        if retries != 0:
+            raise err
+        self.api_key = None
+        if self.authenticate():
+            response = getattr(self, method)(object=object, path=path, params=params, retries=1)
+            return response
+        else:
+            raise err
 
     def _check_response(self, response):
         """
-        Checks the HTTP <response> to see if it contains JSON. If it does, checks the JSON for error codes and messages.
-        Raises PardotAPIError if an error was found. If no error was found, returns the JSON.
-        If JSON was not found, returns the response status code.
+        Checks the HTTP response to see if it contains JSON. If it does, checks the JSON for error codes and messages.
+        Raises PardotAPIError if an error was found. If no error was found, returns the JSON. If JSON was not found,
+        returns the response status code.
         """
         if response.headers.get('content-type') == 'application/json':
             json = response.json()
-            for keys in json:
-                error = json.get('err')
-                if error:
-                    raise PardotAPIError(json)
+            error = json.get('err')
+            if error:
+                raise PardotAPIError(json_response=json)
             return json
         else:
             return response.status_code
@@ -93,15 +113,16 @@ class Client():
 
     def authenticate(self):
         """
-         Authenticates the user and sets the API key if successful.
-         Returns True if authentication is successful, False if it isn't.
+         Authenticates the user and sets the API key if successful. Returns True if authentication is successful,
+         False if authentication fails.
         """
         try:
             auth = self._post('login', params={'email': self.email, 'password': self.password})
-            self.api_key = auth['api_key']
-            return True
-        except PardotAPIError, err:
-            print(err)
+            self.api_key = auth.get('api_key')
+            if self.api_key is not None:
+                return True
+            return False
+        except PardotAPIError:
             return False
 
 

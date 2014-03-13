@@ -1,18 +1,17 @@
 class PardotAPIError(Exception):
     """
-    Basic exception class for errors encountered in API post and get requests.
-    Takes the json response and parses out the error code and message.
+    Basic exception class for errors encountered in API post and get requests. Takes the json response and parses out
+    the error code and message.
     """
 
-    def __init__(self, response):
-        self.response = response
+    def __init__(self, json_response):
+        self.response = json_response
         try:
-            self.err_code = response['@attributes']['err_code']
-            self.message = str(response['err'])
+            self.err_code = json_response['@attributes']['err_code']
+            self.message = str(json_response['err'])
         except KeyError:
             self.err_code = 0
-            self.message = 'Unknown error occurred'
+            self.message = 'Unknown API error occurred'
 
     def __str__(self):
-        #print('Raw JSON error response: {}'.format(self.response))
-        return 'Error {err_code}: {message}'.format(err_code=self.err_code, message=self.message)
+        return 'Pardot API Error {err_code}: {message}'.format(err_code=self.err_code, message=self.message)
