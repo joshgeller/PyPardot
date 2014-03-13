@@ -132,6 +132,16 @@ class Prospects():
             return True
         return False
 
+    def update_field_by_id(self, id=None, field_name=None, field_value=None):
+        """Updates the provided field for the prospect specific by <id>. Returns the updated prospect."""
+        result = self.update_by_id(id=id, **{field_name: field_value})
+        return result
+
+    def update_field_by_email(self, email=None, field_name=None, field_value=None):
+        """Updates the provided field for the prospect specific by <email>. Returns the updated prospect."""
+        result = self.update_by_email(email=email, **{field_name: field_value})
+        return result
+
     def _get(self, object='prospect', path=None, params=None):
         """GET requests for the Prospect object"""
         if params is None:
