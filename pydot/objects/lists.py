@@ -22,17 +22,17 @@ class Lists():
         result = self._get(path='/do/read/id/{id}'.format(id=id))
         return result
 
-    def _get(self, path=None, params=None):
+    def _get(self, object='list', path=None, params=None):
         """GET requests for the List object"""
         if params is None:
             params = {}
-        result = self.client.get(object='list', path=path, params=params)
+        result = self.client.get(object=object, path=path, params=params)
         return result
 
-    def _post(self, path=None, params=None):
+    def _post(self, object='list', path=None, params=None):
         """POST requests for the List object"""
         if params is None:
             params = {}
-        result = self.client.post(object='list', path=path, params=params)
+        result = self.client.post(object=object, path=path, params=params)
         return result
 

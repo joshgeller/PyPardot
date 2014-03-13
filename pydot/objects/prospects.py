@@ -132,18 +132,18 @@ class Prospects():
             return True
         return False
 
-    def _get(self, path=None, params=None):
+    def _get(self, object='prospect', path=None, params=None):
         """GET requests for the Prospect object"""
         if params is None:
             params = {}
-        result = self.client.get(object='prospect', path=path, params=params)
+        result = self.client.get(object=object, path=path, params=params)
         return result
 
-    def _post(self, path=None, params=None):
+    def _post(self, object='prospect', path=None, params=None):
         """POST requests for the Prospect object"""
         if params is None:
             params = {}
-        result = self.client.post(object='prospect', path=path, params=params)
+        result = self.client.post(object=object, path=path, params=params)
         return result
 
 
