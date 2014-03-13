@@ -55,13 +55,13 @@ class Client():
                 response = self._handle_expired_api_key(err, retries, '_post', object, path, params)
                 return response
             else:
-                print(err)
+                raise err
 
     def get(self, object, path=None, params=None, retries=0):
         """
         Makes a GET request to the API. Checks for invalid requests that raise PardotAPIErrors. If the API key is
         invalid, one re-authentication request is made, in case the key has simply expired. If no errors are raised,
-        returns either  the JSON response, or if no JSON was returned, returns the HTTP response status code.
+        returns either the JSON response, or if no JSON was returned, returns the HTTP response status code.
         """
         if params is None:
             params = {}
@@ -75,7 +75,7 @@ class Client():
                 response = self._handle_expired_api_key(err, retries, '_get', object, path, params)
                 return response
             else:
-                print(err)
+                raise err
 
     def _handle_expired_api_key(self, err, retries, method, object, path, params):
         """
