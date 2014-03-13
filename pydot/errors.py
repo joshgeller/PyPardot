@@ -6,10 +6,9 @@ class PardotAPIError(Exception):
 
     def __init__(self, json_response):
         self.response = json_response
-        try:
-            self.err_code = json_response['@attributes']['err_code']
-            self.message = str(json_response['err'])
-        except KeyError:
+        self.err_code = json_response.get('@attributes').get('err_code')
+        self.message = str(json_response.get('err'))
+        if self.err_code is None:
             self.err_code = 0
             self.message = 'Unknown API error occurred'
 
