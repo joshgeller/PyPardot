@@ -27,15 +27,15 @@ class Client():
         self.password = password
         self.user_key = user_key
         self.api_key = None
-        self.Lists = Lists(self)
-        self.Emails = Emails(self)
-        self.Prospects = Prospects(self)
-        self.Opportunities = Opportunities(self)
-        self.Accounts = Accounts(self)
-        self.Users = Users(self)
-        self.Visits = Visits(self)
-        self.Visitors = Visitors(self)
-        self.VisitorActivities = VisitorActivities(self)
+        self.lists = Lists(self)
+        self.emails = Emails(self)
+        self.prospects = Prospects(self)
+        self.opportunities = Opportunities(self)
+        self.accounts = Accounts(self)
+        self.users = Users(self)
+        self.visits = Visits(self)
+        self.visitors = Visitors(self)
+        self.visitorActivities = VisitorActivities(self)
 
     def post(self, object, path=None, params=None, retries=0):
         """
