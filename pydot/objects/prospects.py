@@ -133,13 +133,19 @@ class Prospects():
         return False
 
     def update_field_by_id(self, id=None, field_name=None, field_value=None):
-        """Updates the provided field for the prospect specific by <id>. Returns the updated prospect."""
+        """Updates the provided field for the prospect specified by <id>. Returns the updated prospect."""
         result = self.update_by_id(id=id, **{field_name: field_value})
         return result
 
     def update_field_by_email(self, email=None, field_name=None, field_value=None):
-        """Updates the provided field for the prospect specific by <email>. Returns the updated prospect."""
+        """Updates the provided field for the prospect specified by <email>. Returns the updated prospect."""
         result = self.update_by_email(email=email, **{field_name: field_value})
+        return result
+
+    def add_to_list(self, prospect_id=None, list_id=None):
+        """Adds the prospect specified by <prospect_id> to the list specified by <list_id>."""
+        params = {'prospect_id': prospect_id, 'list_id': list_id}
+        result = self._post(object='listMembership', path='/do/create', params=params)
         return result
 
     def _get(self, object='prospect', path=None, params=None):
