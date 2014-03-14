@@ -47,6 +47,7 @@ class PardotAPI():
             params = {}
         params.update({'user_key': self.user_key, 'api_key': self.api_key, 'format': 'json'})
         try:
+            self._check_auth()
             request = requests.post(self._full_path(object, path), params=params)
             response = self._check_response(request)
             return response
@@ -67,6 +68,7 @@ class PardotAPI():
             params = {}
         params.update({'user_key': self.user_key, 'api_key': self.api_key, 'format': 'json'})
         try:
+            self._check_auth()
             request = requests.get(self._full_path(object, path), params=params)
             response = self._check_response(request)
             return response
@@ -114,6 +116,12 @@ class PardotAPI():
             return json
         else:
             return response.status_code
+
+    def _check_auth(self, object):
+        if object == 'login':
+            return
+        if self.api_key is None:
+            self.authenticate()
 
     def authenticate(self):
         """
