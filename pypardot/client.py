@@ -47,13 +47,13 @@ class PardotAPI():
             params = {}
         params.update({'user_key': self.user_key, 'api_key': self.api_key, 'format': 'json'})
         try:
-            self._check_auth()
+            self._check_auth(object=object)
             request = requests.post(self._full_path(object, path), params=params)
             response = self._check_response(request)
             return response
         except PardotAPIError, err:
             if err.message == 'Invalid API key or user key':
-                response = self._handle_expired_api_key(err, retries, '_post', object, path, params)
+                response = self._handle_expired_api_key(err, retries, 'post', object, path, params)
                 return response
             else:
                 raise err
@@ -68,13 +68,13 @@ class PardotAPI():
             params = {}
         params.update({'user_key': self.user_key, 'api_key': self.api_key, 'format': 'json'})
         try:
-            self._check_auth()
+            self._check_auth(object=object)
             request = requests.get(self._full_path(object, path), params=params)
             response = self._check_response(request)
             return response
         except PardotAPIError, err:
             if err.message == 'Invalid API key or user key':
-                response = self._handle_expired_api_key(err, retries, '_get', object, path, params)
+                response = self._handle_expired_api_key(err, retries, 'get', object, path, params)
                 return response
             else:
                 raise err
