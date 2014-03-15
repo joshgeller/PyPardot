@@ -138,6 +138,16 @@ class Prospects():
         result = self.update_by_email(email=email, **{field_name: field_value})
         return result
 
+    def read_field_by_email(self, email=None, field_name=None):
+        """Returns the value of the provided field for the prospect specified by <email>."""
+        result = self.read_by_email(email=email)
+        return result.get('prospect').get(field_name)
+
+    def read_field_by_id(self, id=None, field_name=None):
+        """Returns the value of the provided field for the prospect specified by <id>."""
+        result = self.read_by_id(id=id)
+        return result.get('prospect').get(field_name)
+
     def add_to_list(self, prospect_id=None, list_id=None):
         """Adds the prospect specified by <prospect_id> to the list specified by <list_id>."""
         params = {'prospect_id': prospect_id, 'list_id': list_id}
