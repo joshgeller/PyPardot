@@ -5,7 +5,7 @@ PyPardot is an API wrapper for [Pardot](http://www.pardot.com/), written in Pyth
 Using it is simple:
 
 ```
-import pydot
+import pypardot
 
 
 p = PardotAPI(
