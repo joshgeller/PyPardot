@@ -18,7 +18,6 @@ class Opportunities():
     def create_by_email(self, prospect_email=None, name=None, value=None, probability=None, **kwargs):
         """
         Creates a new opportunity using the specified data. <prospect_email> must correspond to an existing prospect.
-        <name>, <value>, and <probability> correspond to the opportunity being created.
         """
         kwargs.update({'prospect_email': prospect_email, 'name': name, 'value': value, 'probability': probability})
         result = self._post(
@@ -29,7 +28,6 @@ class Opportunities():
     def create_by_id(self, prospect_id=None, name=None, value=None, probability=None, **kwargs):
         """
         Creates a new opportunity using the specified data. <prospect_id> must correspond to an existing prospect.
-        <name>, <value>, and <probability> correspond to the opportunity being created.
         """
         kwargs.update({'prospect_id': prospect_id, 'name': name, 'value': value, 'probability': probability})
         result = self._post(
@@ -42,7 +40,7 @@ class Opportunities():
         Returns the data for the opportunity specified by <id>, including campaign assignment and associated visitor
         activities. <id> is the Pardot ID for the target opportunity.
         """
-        result = self._get(path='/do/read/id/{id}'.format(id=id))
+        result = self._post(path='/do/read/id/{id}'.format(id=id))
         return result
 
     def update(self, id=None):
@@ -51,7 +49,7 @@ class Opportunities():
         opportunity. Fields that are not updated by the request remain unchanged. Returns an updated version of the
         opportunity.
         """
-        result = self._get(path='/do/update/id/{id}'.format(id=id))
+        result = self._post(path='/do/update/id/{id}'.format(id=id))
         return result
 
     def delete(self, id=None):
@@ -59,8 +57,7 @@ class Opportunities():
         Deletes the opportunity specified by <id>. <id> is the Pardot ID for the target opportunity. Returns no response
         on success.
         """
-        # TODO audit HTTP response
-        result = self._get(path='/do/delete/id/{id}'.format(id=id))
+        result = self._post(path='/do/delete/id/{id}'.format(id=id))
         return result
 
     def undelete(self, id=None):
@@ -68,8 +65,7 @@ class Opportunities():
         Un-deletes the opportunity specified by <id>. <id> is the Pardot ID for the target opportunity. Returns no
         response on success.
         """
-        # TODO audit HTTP response
-        result = self._get(path='/do/undelete/id/{id}'.format(id=id))
+        result = self._post(path='/do/undelete/id/{id}'.format(id=id))
         return result
 
     def _get(self, object='opportunity', path=None, params=None):

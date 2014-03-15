@@ -19,18 +19,18 @@ class Lists():
         """
         Returns the data for the list specified by <id>.<id> is the Pardot ID of the target list.
         """
-        result = self._get(path='/do/read/id/{id}'.format(id=id))
+        result = self._post(path='/do/read/id/{id}'.format(id=id))
         return result
 
     def _get(self, object='list', path=None, params=None):
-        """GET requests for the List object"""
+        """GET requests for the List object."""
         if params is None:
             params = {}
         result = self.client.get(object=object, path=path, params=params)
         return result
 
     def _post(self, object='list', path=None, params=None):
-        """POST requests for the List object"""
+        """POST requests for the List object."""
         if params is None:
             params = {}
         result = self.client.post(object=object, path=path, params=params)

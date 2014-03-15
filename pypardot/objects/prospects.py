@@ -17,9 +17,9 @@ class Prospects():
 
     def assign_by_email(self, email=None, **kwargs):
         """
-        Assigns or reassigns the prospect specified by <email> to a specified Pardot user or
-        group. One (and only one) of the following parameters must be provided to identify the target user or
-        group: <user_email>, <user_id>, or <group_id>. Returns an updated version of the prospect.
+        Assigns or reassigns the prospect specified by <email> to a specified Pardot user or group. One (and only one)
+        of the following parameters must be provided to identify the target user or group: <user_email>, <user_id>, or
+        <group_id>. Returns an updated version of the prospect.
         """
         kwargs['email'] = email
         result = self._post(path='/do/assign/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
@@ -27,9 +27,9 @@ class Prospects():
 
     def assign_by_id(self, id=None, **kwargs):
         """
-        Assigns or reassigns the prospect specified by <id> to a specified Pardot user or
-        group. One (and only one) of the following parameters must be provided to identify the target user or
-        group: <user_email>, <user_id>, or <group_id>. Returns an updated version of the prospect.
+        Assigns or reassigns the prospect specified by <id> to a specified Pardot user or group. One (and only one) of
+        the following parameters must be provided to identify the target user or group: <user_email>, <user_id>, or
+        <group_id>. Returns an updated version of the prospect.
         """
         kwargs['id'] = id
         result = self._post(path='/do/assign/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
@@ -46,7 +46,7 @@ class Prospects():
         result = self._post(path='/do/unassign/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
         return result
 
-    def create(self, **kwargs):
+    def create_by_email(self, email=None, **kwargs):
         """
         Creates a new prospect using the specified data. <email> must be a unique email address. Returns the new prospect.
         """
@@ -76,8 +76,7 @@ class Prospects():
     def update_by_email(self, email=None, **kwargs):
         """
         Updates the provided data for a prospect specified by <email>. <email> is the email address of the
-        prospect. Fields that are not updated by the request remain unchanged.nEmail list subscriptions and custom
-        field data may also be updated with this request.
+        prospect. Fields that are not updated by the request remain unchanged.
         """
         kwargs['email'] = email
         result = self._post(path='/do/update/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
@@ -86,8 +85,7 @@ class Prospects():
     def update_by_id(self, id=None, **kwargs):
         """
         Updates the provided data for a prospect specified by <id>. <id> is the Pardot ID of the prospect.
-        Fields that are not updated by the request remain unchanged. Email list subscriptions and custom field data
-        may also be updated with this request.
+        Fields that are not updated by the request remain unchanged.
         """
         kwargs['id'] = id
         result = self._post(path='/do/update/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
@@ -97,7 +95,7 @@ class Prospects():
         """
         Updates the provided data for the prospect specified by <email>. If a prospect with the provided email address
         does not yet exist, a new prospect is created using the <email> value. Fields that are not updated by the
-        request remain unchanged. Email list subscriptions and custom field data may also be updated with this request.
+        request remain unchanged.
         """
         kwargs['email'] = email
         result = self._post(path='/do/upsert/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
@@ -109,10 +107,8 @@ class Prospects():
         update the prospect's email address. If a prospect with the provided ID is not found, Pardot searches for a
         prospect identified by <email>. If a prospect with the provided email address does not yet exist, a new
         prospect is created using <email> value. Fields that are not updated by the request remain unchanged.
-        Email list subscriptions and custom field data may also be updated with this request.
         """
-        kwargs['id'] = id
-        kwargs['email'] = email
+        kwargs.update({'id': id, 'email': email})
         result = self._post(path='/do/upsert/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
         return result
 
@@ -149,14 +145,14 @@ class Prospects():
         return result
 
     def _get(self, object='prospect', path=None, params=None):
-        """GET requests for the Prospect object"""
+        """GET requests for the Prospect object."""
         if params is None:
             params = {}
         result = self.client.get(object=object, path=path, params=params)
         return result
 
     def _post(self, object='prospect', path=None, params=None):
-        """POST requests for the Prospect object"""
+        """POST requests for the Prospect object."""
         if params is None:
             params = {}
         result = self.client.post(object=object, path=path, params=params)

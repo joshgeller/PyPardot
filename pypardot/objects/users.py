@@ -1,7 +1,7 @@
 class Users():
     """
     A class to query and use Pardot users.
-    Prospect field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#user
+    User field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#user
     """
 
     def __init__(self, client):
@@ -30,14 +30,14 @@ class Users():
         return result
 
     def _get(self, object='user', path=None, params=None):
-        """GET requests for the User object"""
+        """GET requests for the User object."""
         if params is None:
             params = {}
         result = self.client.get(object=object, path=path, params=params)
         return result
 
     def _post(self, object='user', path=None, params=None):
-        """POST requests for the User object"""
+        """POST requests for the User object."""
         if params is None:
             params = {}
         result = self.client.post(object=object, path=path, params=params)

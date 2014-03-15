@@ -1,7 +1,7 @@
 class VisitorActivities():
     """
     A class to query and use Pardot visitor activities.
-    http://developer.pardot.com/kb/api-version-3/object-field-references#visitor-activity
+    Visitor Activity field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#visitor-activity
     """
 
     def __init__(self, client):
@@ -24,14 +24,14 @@ class VisitorActivities():
         return result
 
     def _get(self, object='visitorActivity', path=None, params=None):
-        """GET requests for the Visitor Activity object"""
+        """GET requests for the Visitor Activity object."""
         if params is None:
             params = {}
         result = self.client.get(object=object, path=path, params=params)
         return result
 
     def _post(self, object='visitorActivity', path=None, params=None):
-        """POST requests for the Visitor Activity object"""
+        """POST requests for the Visitor Activity object."""
         if params is None:
             params = {}
         result = self.client.post(object=object, path=path, params=params)
