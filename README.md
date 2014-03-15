@@ -56,7 +56,7 @@ Required
 Installation
 ---
 
-Install Pydot by running:
+Install PyPardot by running:
 ```
 pip install pypardot
 ```
