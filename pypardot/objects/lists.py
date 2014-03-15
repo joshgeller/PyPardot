@@ -13,7 +13,7 @@ class Lists():
         Supported search parameters: http://developer.pardot.com/kb/api-version-3/querying-lists
         """
         result = self._get(path='/do/query', params=kwargs)
-        return result
+        return result.get('result')
 
     def read(self, id=None):
         """

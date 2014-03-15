@@ -13,7 +13,7 @@ class Opportunities():
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/querying-opportunities
         """
         result = self._get(path='/do/query', params=kwargs)
-        return result
+        return result.get('result')
 
     def create_by_email(self, prospect_email=None, name=None, value=None, probability=None, **kwargs):
         """

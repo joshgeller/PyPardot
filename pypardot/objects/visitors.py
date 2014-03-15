@@ -13,7 +13,7 @@ class Visitors():
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/querying-visitors#supported-search-criteria-
         """
         result = self._get(path='/do/query', params=kwargs)
-        return result
+        return result.get('result')
 
     def assign(self, id=None, **kwargs):
         """

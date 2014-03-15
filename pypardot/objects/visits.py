@@ -11,7 +11,7 @@ class Visits():
         """Returns the visits matching the given <ids>. The <ids> should be comma separated integers (no spaces)."""
         kwargs['ids'] = ids.replace(' ', '')
         result = self._get(path='/do/query', params=kwargs)
-        return result
+        return result.get('result')
 
     def query_by_visitor_ids(self, visitor_ids=None, **kwargs):
         """
