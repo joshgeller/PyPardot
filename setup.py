@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='pypardot',
-    packages=['pypardot'],  # this must be the same as the name above
+    packages=['pypardot', 'pypardot.objects'],  # this must be the same as the name above
     version='0.1',
     description='An API wrapper for Pardot marketing automation software.',
     author='Josh Geller',
