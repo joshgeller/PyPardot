@@ -35,7 +35,7 @@ class PardotAPI():
         self.users = Users(self)
         self.visits = Visits(self)
         self.visitors = Visitors(self)
-        self.visitorActivities = VisitorActivities(self)
+        self.visitoractivities = VisitorActivities(self)
 
     def post(self, object, path=None, params=None, retries=0):
         """
