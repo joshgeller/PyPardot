@@ -116,6 +116,7 @@ PyPardot supports some un-documented API methods:
 
 + `prospects.add_to_list`: Adds the prospect to a Pardot list
 + `prospects.update_field_by_email`: Updates the value for a single default or custom field
++ `prospects.read_field_by_email`: Returns the value for a single default or custom field
 + More coming soon!
 
 ### Error Handling
