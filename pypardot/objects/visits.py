@@ -20,7 +20,7 @@ class Visits():
         """
         kwargs['visitor_ids'] = visitor_ids.replace(' ', '')
         result = self._get(path='/do/query', params=kwargs)
-        return result
+        return result.get('result')
 
     def query_by_prospect_ids(self, prospect_ids=None, **kwargs):
         """
@@ -29,7 +29,7 @@ class Visits():
         """
         kwargs['prospect_ids'] = prospect_ids.replace(' ', '')
         result = self._get(path='/do/query', params=kwargs)
-        return result
+        return result.get('result')
 
     def read(self, id=None, **kwargs):
         """
