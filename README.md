@@ -58,7 +58,7 @@ Installation
 
 Install Pydot by running:
 ```
-pip install pydot
+pip install pypardot
 ```
 
 Usage
