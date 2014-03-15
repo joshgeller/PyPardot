@@ -13,4 +13,4 @@ class PardotAPIError(Exception):
             self.message = 'Unknown API error occurred'
 
     def __str__(self):
-        return 'Pardot API Error {err_code}: {message}'.format(err_code=self.err_code, message=self.message)
+        return 'Error #{err_code}: {message}'.format(err_code=self.err_code, message=self.message)
