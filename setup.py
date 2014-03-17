@@ -1,9 +1,4 @@
-import os
 from setuptools import setup
-
-
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
 setup(
@@ -15,5 +10,4 @@ setup(
     keywords="pardot",
     url="https://github.com/joshgeller/PyPardot",
     packages=['pypardot', 'pypardot.objects'],
-    long_description=read('README.md'),
 )
