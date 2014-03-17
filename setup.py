@@ -1,14 +1,19 @@
-from distutils.core import setup
+import os
+from setuptools import setup
+
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 setup(
-    name='pypardot',
-    packages=['pypardot', 'pypardot.objects'],  # this must be the same as the name above
-    version='0.1',
-    description='An API wrapper for Pardot marketing automation software.',
-    author='Josh Geller',
-    author_email='joshualgeller@gmail.com',
-    url='https://github.com/joshgeller/PyPardot',  # use the URL to the github repo
-    download_url='https://github.com/joshgeller/PyPardot/tarball/0.1',  # I'll explain this in a second
-    keywords=['pardot', 'api', 'wrapper'],  # arbitrary keywords
-    classifiers=[],
+    name="PyPardot",
+    version="0.1",
+    author="Josh Geller",
+    author_email="joshualgeller@gmail.com",
+    description=("API wrapper for Pardot marketing automation software."),
+    keywords="pardot",
+    url="https://github.com/joshgeller/PyPardot",
+    packages=['pypardot', 'pypardot.objects'],
+    long_description=read('README.md'),
 )
