@@ -3,8 +3,13 @@ import unittest
 from ...client import PardotAPI
 from ...errors import PardotAPIArgumentError, PardotAPIError
 
-from config import *
+try:
+    from .config import *
+    CONFIG_EXISTS = True
+except Exception, e:
+    CONFIG_EXISTS = False
 
+@unittest.skipUnless(CONFIG_EXISTS, 'Requires Pardot configuration in config.py')
 class TestProspects(unittest.TestCase):
     def setUp(self):
         self.pardot = PardotAPI(email=PARDOT_USER, password=PARDOT_PASSWORD, user_key=PARDOT_USER_KEY)
