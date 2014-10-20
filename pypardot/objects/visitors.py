@@ -21,8 +21,7 @@ class Visitors():
         parameters must be provided to identify the target prospect: <prospect_email> or <prospect_id>. Returns an
         updated version of the visitor.
         """
-        kwargs['id'] = id
-        result = self._post(path='/do/assign/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/assign/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def read(self, id=None, **kwargs):
@@ -30,8 +29,7 @@ class Visitors():
         Returns the data for the visitor specified by <id>, including associated visitor activities, identified
         company data, and visitor referrers. <id> is the Pardot ID for the target visitor.
         """
-        kwargs['id'] = id
-        result = self._post(path='/do/read/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def _get(self, object='visitor', path=None, params=None):

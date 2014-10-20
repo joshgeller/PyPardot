@@ -19,9 +19,9 @@ class Opportunities():
         """
         Creates a new opportunity using the specified data. <prospect_email> must correspond to an existing prospect.
         """
-        kwargs.update({'prospect_email': prospect_email, 'name': name, 'value': value, 'probability': probability})
+        kwargs.update({'name': name, 'value': value, 'probability': probability})
         result = self._post(
-            path='/do/create/prospect_email/{prospect_email}'.format(prospect_email=kwargs.get('prospect_email')),
+            path='/do/create/prospect_email/{prospect_email}'.format(prospect_email=prospect_email),
             params=kwargs)
         return result
 
@@ -29,9 +29,9 @@ class Opportunities():
         """
         Creates a new opportunity using the specified data. <prospect_id> must correspond to an existing prospect.
         """
-        kwargs.update({'prospect_id': prospect_id, 'name': name, 'value': value, 'probability': probability})
+        kwargs.update({'name': name, 'value': value, 'probability': probability})
         result = self._post(
-            path='/do/create/prospect_id/{prospect_id}'.format(prospect_id=kwargs.get('prospect_id')),
+            path='/do/create/prospect_id/{prospect_id}'.format(prospect_id=prospect_id),
             params=kwargs)
         return result
 

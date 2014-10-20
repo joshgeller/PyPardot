@@ -19,8 +19,7 @@ class VisitorActivities():
         """
         Returns the data for the visitor activity specified by <id>. <id> is the Pardot ID for the target visitor activity.
         """
-        kwargs['id'] = id
-        result = self._post(path='/do/read/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def _get(self, object='visitorActivity', path=None, params=None):

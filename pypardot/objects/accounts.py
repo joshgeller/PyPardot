@@ -33,8 +33,7 @@ class Accounts():
         Returns the data for the prospect account specified by <id>. <id> is the Pardot ID of the target prospect
         account.
         """
-        kwargs['id'] = id
-        result = self._post(path='/do/read/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def update(self, id=None, **kwargs):
@@ -42,8 +41,7 @@ class Accounts():
         Updates the data for the prospect account specified by <id>. <id> is the Pardot ID of the target prospect
         account.
         """
-        kwargs['id'] = id
-        result = self._post(path='/do/update/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/update/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def _get(self, object='prospectAccount', path=None, params=None):

@@ -21,8 +21,7 @@ class Prospects():
         of the following parameters must be provided to identify the target user or group: <user_email>, <user_id>, or
         <group_id>. Returns an updated version of the prospect.
         """
-        kwargs['email'] = email
-        result = self._post(path='/do/assign/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
+        result = self._post(path='/do/assign/email/{email}'.format(email=email), params=kwargs)
         return result
 
     def assign_by_id(self, id=None, **kwargs):
@@ -31,26 +30,24 @@ class Prospects():
         the following parameters must be provided to identify the target user or group: <user_email>, <user_id>, or
         <group_id>. Returns an updated version of the prospect.
         """
-        kwargs['id'] = id
-        result = self._post(path='/do/assign/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/assign/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def unassign_by_email(self, email=None, **kwargs):
         """Unassigns the prospect specified by <email>. Returns an updated version of the prospect."""
-        result = self._post(path='/do/unassign/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
+        result = self._post(path='/do/unassign/email/{email}'.format(email=email), params=kwargs)
         return result
 
     def unassign_by_id(self, id=None, **kwargs):
         """Unassigns the prospect specified by <id>. Returns an updated version of the prospect."""
-        kwargs['id'] = id
-        result = self._post(path='/do/unassign/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/unassign/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def create_by_email(self, email=None, **kwargs):
         """
         Creates a new prospect using the specified data. <email> must be a unique email address. Returns the new prospect.
         """
-        result = self._post(path='/do/create/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
+        result = self._post(path='/do/create/email/{email}'.format(email=email), params=kwargs)
         return result
 
     def read_by_email(self, email=None, **kwargs):
@@ -59,8 +56,7 @@ class Prospects():
         matching statuses, associated visitor activities, email list subscriptions, and custom field data.
         <email> is the email address of the target prospect.
         """
-        kwargs['email'] = email
-        result = self._post(path='/do/read/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
+        result = self._post(path='/do/read/email/{email}'.format(email=email), params=kwargs)
         return result
 
     def read_by_id(self, id=None, **kwargs):
@@ -69,8 +65,7 @@ class Prospects():
         matching statuses, associated visitor activities, email list subscriptions, and custom field data.
         <id> is the Pardot ID of the target prospect.
         """
-        kwargs['id'] = id
-        result = self._post(path='/do/read/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def update_by_email(self, email=None, **kwargs):
@@ -78,8 +73,7 @@ class Prospects():
         Updates the provided data for a prospect specified by <email>. <email> is the email address of the
         prospect. Fields that are not updated by the request remain unchanged.
         """
-        kwargs['email'] = email
-        result = self._post(path='/do/update/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
+        result = self._post(path='/do/update/email/{email}'.format(email=email), params=kwargs)
         return result
 
     def update_by_id(self, id=None, **kwargs):
@@ -87,8 +81,7 @@ class Prospects():
         Updates the provided data for a prospect specified by <id>. <id> is the Pardot ID of the prospect.
         Fields that are not updated by the request remain unchanged.
         """
-        kwargs['id'] = id
-        result = self._post(path='/do/update/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/update/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def upsert_by_email(self, email=None, **kwargs):
@@ -97,8 +90,7 @@ class Prospects():
         does not yet exist, a new prospect is created using the <email> value. Fields that are not updated by the
         request remain unchanged.
         """
-        kwargs['email'] = email
-        result = self._post(path='/do/upsert/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
+        result = self._post(path='/do/upsert/email/{email}'.format(email=email), params=kwargs)
         return result
 
     def upsert_by_id(self, id=None, email=None, **kwargs):
@@ -109,21 +101,19 @@ class Prospects():
         prospect is created using <email> value. Fields that are not updated by the request remain unchanged.
         """
         kwargs.update({'id': id, 'email': email})
-        result = self._post(path='/do/upsert/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/upsert/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def delete_by_email(self, email=None, **kwargs):
         """Deletes the prospect specified by <email>. Returns True if operation was successful."""
-        kwargs['email'] = email
-        result = self._post(path='/do/delete/email/{email}'.format(email=kwargs.get('email')), params=kwargs)
+        result = self._post(path='/do/delete/email/{email}'.format(email=email), params=kwargs)
         if result == 204:
             return True
         return False
 
     def delete_by_id(self, id=None, **kwargs):
         """Deletes the prospect specified by <id>. Returns True if operation was successful."""
-        kwargs['id'] = id
-        result = self._post(path='/do/delete/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/delete/id/{id}'.format(id=id), params=kwargs)
         if result == 204:
             return True
         return False
