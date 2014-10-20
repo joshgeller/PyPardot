@@ -1,3 +1,6 @@
+from ..errors import PardotAPIArgumentError
+
+
 class Prospects():
     """
     A class to query and use Pardot prospects.
@@ -13,7 +16,15 @@ class Prospects():
         Supported search parameters: http://developer.pardot.com/kb/api-version-3/querying-prospects#supported-search-criteria
         """
         result = self._get(path='/do/query', params=kwargs)
-        return result.get('result')
+
+        # Return a list of prospects no matter what.
+        matches = result.get('result')
+        if matches['total_results'] > 1:
+            ret = matches['prospect']
+        else:
+            ret = [matches['prospect']]
+
+        return ret
 
     def assign_by_email(self, email=None, **kwargs):
         """
@@ -47,6 +58,8 @@ class Prospects():
         """
         Creates a new prospect using the specified data. <email> must be a unique email address. Returns the new prospect.
         """
+        if not email:
+            raise PardotAPIArgumentError('email is required to create a prospect.')
         result = self._post(path='/do/create/email/{email}'.format(email=email), params=kwargs)
         return result
 
@@ -56,6 +69,8 @@ class Prospects():
         matching statuses, associated visitor activities, email list subscriptions, and custom field data.
         <email> is the email address of the target prospect.
         """
+        if not email:
+            raise PardotAPIArgumentError('email is required to read a prospect.')
         result = self._post(path='/do/read/email/{email}'.format(email=email), params=kwargs)
         return result
 
@@ -65,6 +80,8 @@ class Prospects():
         matching statuses, associated visitor activities, email list subscriptions, and custom field data.
         <id> is the Pardot ID of the target prospect.
         """
+        if not id:
+            raise PardotAPIArgumentError('id is required to read a prospect.')
         result = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
         return result
 
@@ -73,6 +90,8 @@ class Prospects():
         Updates the provided data for a prospect specified by <email>. <email> is the email address of the
         prospect. Fields that are not updated by the request remain unchanged.
         """
+        if not email:
+            raise PardotAPIArgumentError('email is required to update a prospect.')
         result = self._post(path='/do/update/email/{email}'.format(email=email), params=kwargs)
         return result
 
@@ -81,6 +100,8 @@ class Prospects():
         Updates the provided data for a prospect specified by <id>. <id> is the Pardot ID of the prospect.
         Fields that are not updated by the request remain unchanged.
         """
+        if not id:
+            raise PardotAPIArgumentError('id is required to update a prospect.')
         result = self._post(path='/do/update/id/{id}'.format(id=id), params=kwargs)
         return result
 
@@ -90,22 +111,27 @@ class Prospects():
         does not yet exist, a new prospect is created using the <email> value. Fields that are not updated by the
         request remain unchanged.
         """
+        if not email:
+            raise PardotAPIArgumentError('email is required to upsert a prospect.')
         result = self._post(path='/do/upsert/email/{email}'.format(email=email), params=kwargs)
         return result
 
-    def upsert_by_id(self, id=None, email=None, **kwargs):
+    def upsert_by_id(self, id=None, **kwargs):
         """
         Updates the provided data for the prospect specified by <id>. If an <email> value is provided, it is used to
         update the prospect's email address. If a prospect with the provided ID is not found, Pardot searches for a
         prospect identified by <email>. If a prospect with the provided email address does not yet exist, a new
         prospect is created using <email> value. Fields that are not updated by the request remain unchanged.
         """
-        kwargs.update({'id': id, 'email': email})
+        if not id:
+            raise PardotAPIArgumentError('id is required to upsert a prospect.')
         result = self._post(path='/do/upsert/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def delete_by_email(self, email=None, **kwargs):
         """Deletes the prospect specified by <email>. Returns True if operation was successful."""
+        if not email:
+            raise PardotAPIArgumentError('email is required to delete a prospect.')
         result = self._post(path='/do/delete/email/{email}'.format(email=email), params=kwargs)
         if result == 204:
             return True
@@ -113,6 +139,8 @@ class Prospects():
 
     def delete_by_id(self, id=None, **kwargs):
         """Deletes the prospect specified by <id>. Returns True if operation was successful."""
+        if not id:
+            raise PardotAPIArgumentError('id is required to delete a prospect.')
         result = self._post(path='/do/delete/id/{id}'.format(id=id), params=kwargs)
         if result == 204:
             return True
