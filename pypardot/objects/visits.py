@@ -34,8 +34,7 @@ class Visits():
     def read(self, id=None, **kwargs):
         """
         Returns the data for the visit specified by <id>. <id> is the Pardot ID of the target visit."""
-        kwargs['id'] = id
-        result = self._post(path='/do/read/id/{id}'.format(id=kwargs.get('id')), params=kwargs)
+        result = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
         return result
 
     def _get(self, object='visit', path=None, params=None):
