@@ -98,7 +98,7 @@ class PardotAPI():
         """Builds the full path for the API request"""
         full = '{0}/api/{1}/version/{2}'.format(BASE_URI, object, version)
         if path:
-            return full + '/{0}'.format(path)
+            return full + '{0}'.format(path)
         return full
 
     @staticmethod
