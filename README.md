@@ -22,8 +22,11 @@ p.prospects.create_by_email(email='joe@company.com', first_name='Joe', last_name
 # Update a prospect field
 p.prospects.update_field_by_email(email='joe@company.com', field='company', field_value='Joes Plumbing')
 
+# Update or create a prospect
+p.prospects.upsert_by_email(email='joe@company.com', first_name='Joe', last_name='Schmoe')
+
 # Send a one-off email
-p.emails.send_to_email(prospect_email='joe@company.com', email_template_id=123)
+p.emails.send_to_email(prospect_email='joe@company.com', email_template_id=123, campaign_id=456)
 ```
 
 Features
