@@ -37,7 +37,7 @@ class PardotAPI():
         self.visitors = Visitors(self)
         self.visitoractivities = VisitorActivities(self)
 
-    def post(self, object, path=None, params=None, retries=0):
+    def post(self, object_name, path=None, params=None, retries=0):
         """
         Makes a POST request to the API. Checks for invalid requests that raise PardotAPIErrors. If the API key is
         invalid, one re-authentication request is made, in case the key has simply expired. If no errors are raised,
@@ -47,18 +47,18 @@ class PardotAPI():
             params = {}
         params.update({'user_key': self.user_key, 'api_key': self.api_key, 'format': 'json'})
         try:
-            self._check_auth(object=object)
-            request = requests.post(self._full_path(object, path), params=params)
+            self._check_auth(object_name=object_name)
+            request = requests.post(self._full_path(object_name, path), params=params)
             response = self._check_response(request)
             return response
         except PardotAPIError, err:
             if err.message == 'Invalid API key or user key':
-                response = self._handle_expired_api_key(err, retries, 'post', object, path, params)
+                response = self._handle_expired_api_key(err, retries, 'post', object_name, path, params)
                 return response
             else:
                 raise err
 
-    def get(self, object, path=None, params=None, retries=0):
+    def get(self, object_name, path=None, params=None, retries=0):
         """
         Makes a GET request to the API. Checks for invalid requests that raise PardotAPIErrors. If the API key is
         invalid, one re-authentication request is made, in case the key has simply expired. If no errors are raised,
@@ -68,18 +68,18 @@ class PardotAPI():
             params = {}
         params.update({'user_key': self.user_key, 'api_key': self.api_key, 'format': 'json'})
         try:
-            self._check_auth(object=object)
-            request = requests.get(self._full_path(object, path), params=params)
+            self._check_auth(object_name=object_name)
+            request = requests.get(self._full_path(object_name, path), params=params)
             response = self._check_response(request)
             return response
         except PardotAPIError, err:
             if err.message == 'Invalid API key or user key':
-                response = self._handle_expired_api_key(err, retries, 'get', object, path, params)
+                response = self._handle_expired_api_key(err, retries, 'get', object_name, path, params)
                 return response
             else:
                 raise err
 
-    def _handle_expired_api_key(self, err, retries, method, object, path, params):
+    def _handle_expired_api_key(self, err, retries, method, object_name, path, params):
         """
         Tries to refresh an expired API key and re-issue the HTTP request. If the refresh has already been attempted,
         an error is raised.
@@ -88,15 +88,15 @@ class PardotAPI():
             raise err
         self.api_key = None
         if self.authenticate():
-            response = getattr(self, method)(object=object, path=path, params=params, retries=1)
+            response = getattr(self, method)(object_name=object_name, path=path, params=params, retries=1)
             return response
         else:
             raise err
 
     @staticmethod
-    def _full_path(object, path=None, version=3):
+    def _full_path(object_name, path=None, version=3):
         """Builds the full path for the API request"""
-        full = '{0}/api/{1}/version/{2}'.format(BASE_URI, object, version)
+        full = '{0}/api/{1}/version/{2}'.format(BASE_URI, object_name, version)
         if path:
             return full + '{0}'.format(path)
         return full
@@ -117,8 +117,8 @@ class PardotAPI():
         else:
             return response.status_code
 
-    def _check_auth(self, object):
-        if object == 'login':
+    def _check_auth(self, object_name):
+        if object_name == 'login':
             return
         if self.api_key is None:
             self.authenticate()
@@ -136,8 +136,4 @@ class PardotAPI():
             return False
         except PardotAPIError:
             return False
-
-
-
-
 

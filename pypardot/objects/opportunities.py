@@ -68,16 +68,16 @@ class Opportunities():
         result = self._post(path='/do/undelete/id/{id}'.format(id=id))
         return result
 
-    def _get(self, object='opportunity', path=None, params=None):
-        """GET requests for the Opportunity object"""
+    def _get(self, object_name='opportunity', path=None, params=None):
+        """GET requests for the Opportunity object."""
         if params is None:
             params = {}
-        result = self.client.get(object=object, path=path, params=params)
+        result = self.client.get(object_name=object_name, path=path, params=params)
         return result
 
-    def _post(self, object='opportunity', path=None, params=None):
-        """POST requests for the Opportunity object"""
+    def _post(self, object_name='opportunity', path=None, params=None):
+        """POST requests for the Opportunity object."""
         if params is None:
             params = {}
-        result = self.client.post(object=object, path=path, params=params)
+        result = self.client.post(object_name=object_name, path=path, params=params)
         return result
