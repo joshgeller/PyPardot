@@ -1,7 +1,7 @@
 class Accounts(object):
     """
     A class to query and use Pardot accounts.
-    Account field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#prospectAccount
+    Account field reference: http://developer.pardot.com/kb/api-version-3/object-field-references/#prospectAccount
     """
 
     def __init__(self, client):
@@ -10,7 +10,7 @@ class Accounts(object):
     def query(self, **kwargs):
         """
         Returns the prospect accounts matching the specified criteria parameters.
-        Supported search parameters: http://developer.pardot.com/kb/api-version-3/querying-prospect-accounts#supported-search-criteria
+        Supported search criteria: http://developer.pardot.com/kb/api-version-3/prospect-accounts/#supported-search-criteria
         """
         result = self._get(path='/do/query', params=kwargs)
         return result.get('result')

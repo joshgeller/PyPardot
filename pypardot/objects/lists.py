@@ -1,7 +1,7 @@
 class Lists(object):
     """
     A class to query and use Pardot lists.
-    List field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#list
+    List field reference: http://developer.pardot.com/kb/api-version-3/object-field-references/#list
     """
 
     def __init__(self, client):
@@ -10,7 +10,7 @@ class Lists(object):
     def query(self, **kwargs):
         """
         Returns the lists matching the specified criteria parameters.
-        Supported search parameters: http://developer.pardot.com/kb/api-version-3/querying-lists
+        Supported search criteria: http://developer.pardot.com/kb/api-version-3/lists/#supported-search-criteria
         """
         result = self._get(path='/do/query', params=kwargs)
         return result.get('result')

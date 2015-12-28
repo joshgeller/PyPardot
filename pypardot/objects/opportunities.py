@@ -1,7 +1,7 @@
 class Opportunities(object):
     """
     A class to query and use Pardot opportunities.
-    Opportunity field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#opportunity
+    Opportunity field reference: http://developer.pardot.com/kb/api-version-3/object-field-references/#opportunity
     """
 
     def __init__(self, client):
@@ -10,7 +10,7 @@ class Opportunities(object):
     def query(self, **kwargs):
         """
         Returns the opportunities matching the specified criteria parameters.
-        Supported search criteria: http://developer.pardot.com/kb/api-version-3/querying-opportunities
+        Supported search criteria: http://developer.pardot.com/kb/api-version-3/opportunities/#supported-search-criteria
         """
         result = self._get(path='/do/query', params=kwargs)
         return result.get('result')

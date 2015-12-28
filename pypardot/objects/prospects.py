@@ -4,7 +4,7 @@ from ..errors import PardotAPIArgumentError
 class Prospects(object):
     """
     A class to query and use Pardot prospects.
-    Prospect field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#prospect
+    Prospect field reference: http://developer.pardot.com/kb/api-version-3/object-field-references/#prospect
     """
 
     def __init__(self, client):
@@ -13,7 +13,7 @@ class Prospects(object):
     def query(self, **kwargs):
         """
         Returns the prospects matching the specified criteria parameters.
-        Supported search parameters: http://developer.pardot.com/kb/api-version-3/querying-prospects#supported-search-criteria
+        Supported search criteria: http://developer.pardot.com/kb/api-version-3/prospects/#supported-search-criteria
         """
         result = self._get(path='/do/query', params=kwargs)
 

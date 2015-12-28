@@ -1,7 +1,7 @@
 class Users(object):
     """
     A class to query and use Pardot users.
-    User field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#user
+    User field reference: http://developer.pardot.com/kb/api-version-3/object-field-references/#user
     """
 
     def __init__(self, client):
@@ -10,7 +10,7 @@ class Users(object):
     def query(self, **kwargs):
         """
         Returns the users matching the specified criteria parameters.
-        Supported search parameters: http://http://developer.pardot.com/kb/api-version-3/querying-users#supported-search-criteria
+        Supported search criteria: http://developer.pardot.com/kb/api-version-3/users/#supported-search-criteria
         """
         result = self._get(path='/do/query', params=kwargs)
         return result.get('result')
