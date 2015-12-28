@@ -15,16 +15,16 @@ class Prospects(object):
         Returns the prospects matching the specified criteria parameters.
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/prospects/#supported-search-criteria
         """
-        result = self._get(path='/do/query', params=kwargs)
+        response = self._get(path='/do/query', params=kwargs)
 
-        # Return a list of prospects no matter what.
-        matches = result.get('result')
-        if matches['total_results'] > 1:
-            ret = matches['prospect']
-        else:
-            ret = [matches['prospect']]
+        # Ensure result['prospect'] is a list, no matter what.
+        result = response.get('result')
+        if result['total_results'] == 0:
+            result['prospect'] = []
+        elif result['total_results'] == 1:
+            result['prospect'] = [result['prospect']]
 
-        return ret
+        return result
 
     def assign_by_email(self, email=None, **kwargs):
         """

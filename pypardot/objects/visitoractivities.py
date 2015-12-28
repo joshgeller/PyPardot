@@ -13,7 +13,15 @@ class VisitorActivities(object):
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/visitor-activities/#supported-search-criteria
         """
         response = self._get(path='/do/query', params=kwargs)
-        return response.get('result')
+
+        # Ensure result['visitorActivity'] is a list, no matter what.
+        response = response.get('response')
+        if response['total_responses'] == 0:
+            response['visitorActivity'] = []
+        elif response['total_responses'] == 1:
+            response['visitorActivity'] = [response['visitorActivity']]
+
+        return response
 
     def read(self, id=None, **kwargs):
         """

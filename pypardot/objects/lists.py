@@ -13,7 +13,15 @@ class Lists(object):
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/lists/#supported-search-criteria
         """
         response = self._get(path='/do/query', params=kwargs)
-        return response.get('result')
+
+        # Ensure result['list'] is a list, no matter what.
+        result = response.get('result')
+        if result['total_results'] == 0:
+            result['list'] = []
+        elif result['total_results'] == 1:
+            result['list'] = [result['list']]
+
+        return result
 
     def read(self, id=None):
         """
