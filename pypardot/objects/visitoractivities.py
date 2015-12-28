@@ -1,4 +1,4 @@
-class VisitorActivities():
+class VisitorActivities(object):
     """
     A class to query and use Pardot visitor activities.
     Visitor Activity field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#visitor-activity

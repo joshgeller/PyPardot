@@ -1,4 +1,4 @@
-class Opportunities():
+class Opportunities(object):
     """
     A class to query and use Pardot opportunities.
     Opportunity field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#opportunity

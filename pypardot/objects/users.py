@@ -1,4 +1,4 @@
-class Users():
+class Users(object):
     """
     A class to query and use Pardot users.
     User field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#user

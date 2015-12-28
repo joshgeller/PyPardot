@@ -1,4 +1,4 @@
-class Emails():
+class Emails(object):
     """
     A class to query and send Pardot emails.
     Email field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#email

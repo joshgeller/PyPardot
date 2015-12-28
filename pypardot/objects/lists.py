@@ -1,4 +1,4 @@
-class Lists():
+class Lists(object):
     """
     A class to query and use Pardot lists.
     List field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#list

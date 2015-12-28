@@ -1,4 +1,4 @@
-class Accounts():
+class Accounts(object):
     """
     A class to query and use Pardot accounts.
     Account field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#prospectAccount

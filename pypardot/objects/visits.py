@@ -1,4 +1,4 @@
-class Visits():
+class Visits(object):
     """
     A class to query and use Pardot visits.
     Visit field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#visit

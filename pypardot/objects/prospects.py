@@ -1,7 +1,7 @@
 from ..errors import PardotAPIArgumentError
 
 
-class Prospects():
+class Prospects(object):
     """
     A class to query and use Pardot prospects.
     Prospect field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#prospect
