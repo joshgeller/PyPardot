@@ -12,19 +12,19 @@ class Emails(object):
         Sends an email to the prospect identified by <prospect_email>.
         Required parameters: (email_template_id OR (text_content, name, subject, & ((from_email & from_name) OR from_user_id)))
         """
-        result = self._post(
+        response = self._post(
             path='/do/send/prospect_email/{prospect_email}'.format(prospect_email=prospect_email),
             params=kwargs)
-        return result
+        return response
 
     def send_to_id(self, prospect_id=None, **kwargs):
         """
         Sends an email to the prospect identified by <prospect_id>.
         Required parameters: (email_template_id OR (text_content, name, subject, & ((from_email & from_name) OR from_user_id)))
         """
-        result = self._post(
+        response = self._post(
             path='/do/send/prospect_id/{prospect_id}'.format(prospect_id=prospect_id), params=kwargs)
-        return result
+        return response
 
     def send_to_lists(self, **kwargs):
         """
@@ -32,25 +32,25 @@ class Emails(object):
         Required parameters: (email_template_id OR (text_content, name, subject, & ((from_email & from_name) OR from_user_id)))
         """
         kwargs['list_ids'] = kwargs.get('list_ids', None)
-        result = self._post(
+        response = self._post(
             path='/do/send/', params=kwargs)
-        return result
+        return response
 
     def read(self, id=None):
         """Returns the data for the email specified by <id>. <id> is the Pardot ID of the target email."""
-        result = self._post(path='/do/read/id/{id}'.format(id=id))
-        return result
+        response = self._post(path='/do/read/id/{id}'.format(id=id))
+        return response
 
     def _get(self, object_name='email', path=None, params=None):
         """GET requests for the Email object."""
         if params is None:
             params = {}
-        result = self.client.get(object_name=object_name, path=path, params=params)
-        return result
+        response = self.client.get(object_name=object_name, path=path, params=params)
+        return response
 
     def _post(self, object_name='email', path=None, params=None):
         """POST requests for the Email object."""
         if params is None:
             params = {}
-        result = self.client.post(object_name=object_name, path=path, params=params)
-        return result
+        response = self.client.post(object_name=object_name, path=path, params=params)
+        return response

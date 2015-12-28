@@ -12,31 +12,31 @@ class Users(object):
         Returns the users matching the specified criteria parameters.
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/users/#supported-search-criteria
         """
-        result = self._get(path='/do/query', params=kwargs)
-        return result.get('result')
+        response = self._get(path='/do/query', params=kwargs)
+        return response.get('result')
 
     def read_by_id(self, id=None, **kwargs):
         """
         Returns the data for the user specified by <id>. <id> is the Pardot ID of the target user."""
-        result = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
-        return result
+        response = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
+        return response
 
     def read_by_email(self, email=None, **kwargs):
         """
         Returns the data for the user specified by <email>. <email> is the email address of the target user."""
-        result = self._post(path='/do/read/email/{email}'.format(email=email), params=kwargs)
-        return result
+        response = self._post(path='/do/read/email/{email}'.format(email=email), params=kwargs)
+        return response
 
     def _get(self, object_name='user', path=None, params=None):
         """GET requests for the User object."""
         if params is None:
             params = {}
-        result = self.client.get(object_name=object_name, path=path, params=params)
-        return result
+        response = self.client.get(object_name=object_name, path=path, params=params)
+        return response
 
     def _post(self, object_name='user', path=None, params=None):
         """POST requests for the User object."""
         if params is None:
             params = {}
-        result = self.client.post(object_name=object_name, path=path, params=params)
-        return result
+        response = self.client.post(object_name=object_name, path=path, params=params)
+        return response
