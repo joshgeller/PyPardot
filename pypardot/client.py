@@ -136,4 +136,3 @@ class PardotAPI(object):
             return False
         except PardotAPIError:
             return False
-
