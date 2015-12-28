@@ -10,4 +10,5 @@ setup(
     keywords="pardot",
     url="https://github.com/joshgeller/PyPardot",
     packages=['pypardot', 'pypardot.objects'],
+    install_requires=['requests'],
 )
