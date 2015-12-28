@@ -22,17 +22,17 @@ class VisitorActivities():
         result = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
         return result
 
-    def _get(self, object='visitorActivity', path=None, params=None):
+    def _get(self, object_name='visitorActivity', path=None, params=None):
         """GET requests for the Visitor Activity object."""
         if params is None:
             params = {}
-        result = self.client.get(object=object, path=path, params=params)
+        result = self.client.get(object_name=object_name, path=path, params=params)
         return result
 
-    def _post(self, object='visitorActivity', path=None, params=None):
+    def _post(self, object_name='visitorActivity', path=None, params=None):
         """POST requests for the Visitor Activity object."""
         if params is None:
             params = {}
-        result = self.client.post(object=object, path=path, params=params)
+        result = self.client.post(object_name=object_name, path=path, params=params)
         return result
 

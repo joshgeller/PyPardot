@@ -169,21 +169,21 @@ class Prospects():
     def add_to_list(self, prospect_id=None, list_id=None):
         """Adds the prospect specified by <prospect_id> to the list specified by <list_id>."""
         params = {'prospect_id': prospect_id, 'list_id': list_id}
-        result = self._post(object='listMembership', path='/do/create', params=params)
+        result = self._post(object_name='listMembership', path='/do/create', params=params)
         return result
 
-    def _get(self, object='prospect', path=None, params=None):
+    def _get(self, object_name='prospect', path=None, params=None):
         """GET requests for the Prospect object."""
         if params is None:
             params = {}
-        result = self.client.get(object=object, path=path, params=params)
+        result = self.client.get(object_name=object_name, path=path, params=params)
         return result
 
-    def _post(self, object='prospect', path=None, params=None):
+    def _post(self, object_name='prospect', path=None, params=None):
         """POST requests for the Prospect object."""
         if params is None:
             params = {}
-        result = self.client.post(object=object, path=path, params=params)
+        result = self.client.post(object_name=object_name, path=path, params=params)
         return result
 
 
