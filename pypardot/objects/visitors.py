@@ -1,7 +1,7 @@
-class Visitors():
+class Visitors(object):
     """
     A class to query and use Pardot visitors.
-    Visitor field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#visitor
+    Visitor field reference: http://developer.pardot.com/kb/api-version-3/object-field-references/#visitor
     """
 
     def __init__(self, client):
@@ -10,7 +10,7 @@ class Visitors():
     def query(self, **kwargs):
         """
         Returns the visitors matching the specified criteria parameters.
-        Supported search criteria: http://developer.pardot.com/kb/api-version-3/querying-visitors#supported-search-criteria-
+        Supported search criteria: http://developer.pardot.com/kb/api-version-3/visitors/#supported-search-criteria
         """
         result = self._get(path='/do/query', params=kwargs)
         return result.get('result')
@@ -45,4 +45,3 @@ class Visitors():
             params = {}
         result = self.client.post(object_name=object_name, path=path, params=params)
         return result
-

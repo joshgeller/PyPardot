@@ -21,7 +21,7 @@ except ImportError:
 BASE_URI = 'https://pi.pardot.com'
 
 
-class PardotAPI():
+class PardotAPI(object):
     def __init__(self, email, password, user_key):
         self.email = email
         self.password = password
@@ -136,4 +136,3 @@ class PardotAPI():
             return False
         except PardotAPIError:
             return False
-

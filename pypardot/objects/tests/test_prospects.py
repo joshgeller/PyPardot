@@ -9,6 +9,7 @@ try:
 except Exception, e:
     CONFIG_EXISTS = False
 
+
 @unittest.skipUnless(CONFIG_EXISTS, 'Requires Pardot configuration in config.py')
 class TestProspects(unittest.TestCase):
     def setUp(self):
@@ -115,4 +116,3 @@ class TestProspects(unittest.TestCase):
         self.pardot.prospects.delete_by_id(id=prospect['id'])
         with self.assertRaises(PardotAPIError):
             results = self.pardot.prospects.read_by_id(prospect['id'])
-

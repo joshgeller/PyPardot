@@ -1,7 +1,7 @@
-class VisitorActivities():
+class VisitorActivities(object):
     """
     A class to query and use Pardot visitor activities.
-    Visitor Activity field reference: http://developer.pardot.com/kb/api-version-3/object-field-references#visitor-activity
+    Visitor Activity field reference: http://developer.pardot.com/kb/api-version-3/object-field-references/#visitor-activity
     """
 
     def __init__(self, client):
@@ -10,7 +10,7 @@ class VisitorActivities():
     def query(self, **kwargs):
         """
         Returns the visitor activities matching the specified criteria parameters.
-        Supported search criteria: http://developer.pardot.com/kb/api-version-3/querying-visitor-activities#supported-search-criteria-
+        Supported search criteria: http://developer.pardot.com/kb/api-version-3/visitor-activities/#supported-search-criteria
         """
         result = self._get(path='/do/query', params=kwargs)
         return result.get('result')
@@ -35,4 +35,3 @@ class VisitorActivities():
             params = {}
         result = self.client.post(object_name=object_name, path=path, params=params)
         return result
-

@@ -6,3 +6,6 @@
 
 # OSX directory meta files
 .DS_Store
+
+# Python egg metadata
+*.egg-info
