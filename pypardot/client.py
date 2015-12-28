@@ -8,6 +8,7 @@ from objects.users import Users
 from objects.visits import Visits
 from objects.visitors import Visitors
 from objects.visitoractivities import VisitorActivities
+from objects.campaigns import Campaigns
 
 from errors import PardotAPIError
 
@@ -36,6 +37,7 @@ class PardotAPI(object):
         self.visits = Visits(self)
         self.visitors = Visitors(self)
         self.visitoractivities = VisitorActivities(self)
+        self.campaigns = Campaigns(self)
 
     def post(self, object_name, path=None, params=None, retries=0):
         """
