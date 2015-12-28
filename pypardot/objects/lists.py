@@ -12,26 +12,26 @@ class Lists(object):
         Returns the lists matching the specified criteria parameters.
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/lists/#supported-search-criteria
         """
-        result = self._get(path='/do/query', params=kwargs)
-        return result.get('result')
+        response = self._get(path='/do/query', params=kwargs)
+        return response.get('result')
 
     def read(self, id=None):
         """
         Returns the data for the list specified by <id>.<id> is the Pardot ID of the target list.
         """
-        result = self._post(path='/do/read/id/{id}'.format(id=id))
-        return result
+        response = self._post(path='/do/read/id/{id}'.format(id=id))
+        return response
 
     def _get(self, object_name='list', path=None, params=None):
         """GET requests for the List object."""
         if params is None:
             params = {}
-        result = self.client.get(object_name=object_name, path=path, params=params)
-        return result
+        response = self.client.get(object_name=object_name, path=path, params=params)
+        return response
 
     def _post(self, object_name='list', path=None, params=None):
         """POST requests for the List object."""
         if params is None:
             params = {}
-        result = self.client.post(object_name=object_name, path=path, params=params)
-        return result
+        response = self.client.post(object_name=object_name, path=path, params=params)
+        return response

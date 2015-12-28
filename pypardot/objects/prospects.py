@@ -32,8 +32,8 @@ class Prospects(object):
         of the following parameters must be provided to identify the target user or group: <user_email>, <user_id>, or
         <group_id>. Returns an updated version of the prospect.
         """
-        result = self._post(path='/do/assign/email/{email}'.format(email=email), params=kwargs)
-        return result
+        response = self._post(path='/do/assign/email/{email}'.format(email=email), params=kwargs)
+        return response
 
     def assign_by_id(self, id=None, **kwargs):
         """
@@ -41,18 +41,18 @@ class Prospects(object):
         the following parameters must be provided to identify the target user or group: <user_email>, <user_id>, or
         <group_id>. Returns an updated version of the prospect.
         """
-        result = self._post(path='/do/assign/id/{id}'.format(id=id), params=kwargs)
-        return result
+        response = self._post(path='/do/assign/id/{id}'.format(id=id), params=kwargs)
+        return response
 
     def unassign_by_email(self, email=None, **kwargs):
         """Unassigns the prospect specified by <email>. Returns an updated version of the prospect."""
-        result = self._post(path='/do/unassign/email/{email}'.format(email=email), params=kwargs)
-        return result
+        response = self._post(path='/do/unassign/email/{email}'.format(email=email), params=kwargs)
+        return response
 
     def unassign_by_id(self, id=None, **kwargs):
         """Unassigns the prospect specified by <id>. Returns an updated version of the prospect."""
-        result = self._post(path='/do/unassign/id/{id}'.format(id=id), params=kwargs)
-        return result
+        response = self._post(path='/do/unassign/id/{id}'.format(id=id), params=kwargs)
+        return response
 
     def create_by_email(self, email=None, **kwargs):
         """
@@ -60,8 +60,8 @@ class Prospects(object):
         """
         if not email:
             raise PardotAPIArgumentError('email is required to create a prospect.')
-        result = self._post(path='/do/create/email/{email}'.format(email=email), params=kwargs)
-        return result
+        response = self._post(path='/do/create/email/{email}'.format(email=email), params=kwargs)
+        return response
 
     def read_by_email(self, email=None, **kwargs):
         """
@@ -71,8 +71,8 @@ class Prospects(object):
         """
         if not email:
             raise PardotAPIArgumentError('email is required to read a prospect.')
-        result = self._post(path='/do/read/email/{email}'.format(email=email), params=kwargs)
-        return result
+        response = self._post(path='/do/read/email/{email}'.format(email=email), params=kwargs)
+        return response
 
     def read_by_id(self, id=None, **kwargs):
         """
@@ -82,8 +82,8 @@ class Prospects(object):
         """
         if not id:
             raise PardotAPIArgumentError('id is required to read a prospect.')
-        result = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
-        return result
+        response = self._post(path='/do/read/id/{id}'.format(id=id), params=kwargs)
+        return response
 
     def update_by_email(self, email=None, **kwargs):
         """
@@ -92,8 +92,8 @@ class Prospects(object):
         """
         if not email:
             raise PardotAPIArgumentError('email is required to update a prospect.')
-        result = self._post(path='/do/update/email/{email}'.format(email=email), params=kwargs)
-        return result
+        response = self._post(path='/do/update/email/{email}'.format(email=email), params=kwargs)
+        return response
 
     def update_by_id(self, id=None, **kwargs):
         """
@@ -102,8 +102,8 @@ class Prospects(object):
         """
         if not id:
             raise PardotAPIArgumentError('id is required to update a prospect.')
-        result = self._post(path='/do/update/id/{id}'.format(id=id), params=kwargs)
-        return result
+        response = self._post(path='/do/update/id/{id}'.format(id=id), params=kwargs)
+        return response
 
     def upsert_by_email(self, email=None, **kwargs):
         """
@@ -113,8 +113,8 @@ class Prospects(object):
         """
         if not email:
             raise PardotAPIArgumentError('email is required to upsert a prospect.')
-        result = self._post(path='/do/upsert/email/{email}'.format(email=email), params=kwargs)
-        return result
+        response = self._post(path='/do/upsert/email/{email}'.format(email=email), params=kwargs)
+        return response
 
     def upsert_by_id(self, id=None, **kwargs):
         """
@@ -125,15 +125,15 @@ class Prospects(object):
         """
         if not id:
             raise PardotAPIArgumentError('id is required to upsert a prospect.')
-        result = self._post(path='/do/upsert/id/{id}'.format(id=id), params=kwargs)
-        return result
+        response = self._post(path='/do/upsert/id/{id}'.format(id=id), params=kwargs)
+        return response
 
     def delete_by_email(self, email=None, **kwargs):
         """Deletes the prospect specified by <email>. Returns True if operation was successful."""
         if not email:
             raise PardotAPIArgumentError('email is required to delete a prospect.')
-        result = self._post(path='/do/delete/email/{email}'.format(email=email), params=kwargs)
-        if result == 204:
+        response = self._post(path='/do/delete/email/{email}'.format(email=email), params=kwargs)
+        if response == 204:
             return True
         return False
 
@@ -141,47 +141,47 @@ class Prospects(object):
         """Deletes the prospect specified by <id>. Returns True if operation was successful."""
         if not id:
             raise PardotAPIArgumentError('id is required to delete a prospect.')
-        result = self._post(path='/do/delete/id/{id}'.format(id=id), params=kwargs)
-        if result == 204:
+        response = self._post(path='/do/delete/id/{id}'.format(id=id), params=kwargs)
+        if response == 204:
             return True
         return False
 
     def update_field_by_id(self, id=None, field_name=None, field_value=None):
         """Updates the provided field for the prospect specified by <id>. Returns the updated prospect."""
-        result = self.update_by_id(id=id, **{field_name: field_value})
-        return result
+        response = self.update_by_id(id=id, **{field_name: field_value})
+        return response
 
     def update_field_by_email(self, email=None, field_name=None, field_value=None):
         """Updates the provided field for the prospect specified by <email>. Returns the updated prospect."""
-        result = self.update_by_email(email=email, **{field_name: field_value})
-        return result
+        response = self.update_by_email(email=email, **{field_name: field_value})
+        return response
 
     def read_field_by_email(self, email=None, field_name=None):
         """Returns the value of the provided field for the prospect specified by <email>."""
-        result = self.read_by_email(email=email)
-        return result.get('prospect').get(field_name)
+        response = self.read_by_email(email=email)
+        return response.get('prospect').get(field_name)
 
     def read_field_by_id(self, id=None, field_name=None):
         """Returns the value of the provided field for the prospect specified by <id>."""
-        result = self.read_by_id(id=id)
-        return result.get('prospect').get(field_name)
+        response = self.read_by_id(id=id)
+        return response.get('prospect').get(field_name)
 
     def add_to_list(self, prospect_id=None, list_id=None):
         """Adds the prospect specified by <prospect_id> to the list specified by <list_id>."""
         params = {'prospect_id': prospect_id, 'list_id': list_id}
-        result = self._post(object_name='listMembership', path='/do/create', params=params)
-        return result
+        response = self._post(object_name='listMembership', path='/do/create', params=params)
+        return response
 
     def _get(self, object_name='prospect', path=None, params=None):
         """GET requests for the Prospect object."""
         if params is None:
             params = {}
-        result = self.client.get(object_name=object_name, path=path, params=params)
-        return result
+        response = self.client.get(object_name=object_name, path=path, params=params)
+        return response
 
     def _post(self, object_name='prospect', path=None, params=None):
         """POST requests for the Prospect object."""
         if params is None:
             params = {}
-        result = self.client.post(object_name=object_name, path=path, params=params)
-        return result
+        response = self.client.post(object_name=object_name, path=path, params=params)
+        return response
