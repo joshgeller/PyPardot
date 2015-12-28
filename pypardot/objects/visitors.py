@@ -13,7 +13,15 @@ class Visitors(object):
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/visitors/#supported-search-criteria
         """
         response = self._get(path='/do/query', params=kwargs)
-        return response.get('result')
+
+        # Ensure result['visitor'] is a list, no matter what.
+        result = response.get('result')
+        if result['total_results'] == 0:
+            result['visitor'] = []
+        elif result['total_results'] == 1:
+            result['visitor'] = [result['visitor']]
+
+        return result
 
     def assign(self, id=None, **kwargs):
         """

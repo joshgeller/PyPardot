@@ -11,7 +11,15 @@ class Visits(object):
         """Returns the visits matching the given <ids>. The <ids> should be comma separated integers (no spaces)."""
         kwargs['ids'] = ids.replace(' ', '')
         response = self._get(path='/do/query', params=kwargs)
-        return response.get('result')
+
+        # Ensure result['visit'] is a list, no matter what.
+        result = response.get('result')
+        if result['total_results'] == 0:
+            result['visit'] = []
+        elif result['total_results'] == 1:
+            result['visit'] = [result['visit']]
+
+        return result
 
     def query_by_visitor_ids(self, visitor_ids=None, **kwargs):
         """
@@ -20,7 +28,15 @@ class Visits(object):
         """
         kwargs['visitor_ids'] = visitor_ids.replace(' ', '')
         response = self._get(path='/do/query', params=kwargs)
-        return response.get('result')
+
+        # Ensure result['visit'] is a list, no matter what.
+        result = response.get('result')
+        if result['total_results'] == 0:
+            result['visit'] = []
+        elif result['total_results'] == 1:
+            result['visit'] = [result['visit']]
+
+        return result
 
     def query_by_prospect_ids(self, prospect_ids=None, **kwargs):
         """
@@ -29,7 +45,15 @@ class Visits(object):
         """
         kwargs['prospect_ids'] = prospect_ids.replace(' ', '')
         response = self._get(path='/do/query', params=kwargs)
-        return response.get('result')
+
+        # Ensure result['visit'] is a list, no matter what.
+        result = response.get('result')
+        if result['total_results'] == 0:
+            result['visit'] = []
+        elif result['total_results'] == 1:
+            result['visit'] = [result['visit']]
+
+        return result
 
     def read(self, id=None, **kwargs):
         """

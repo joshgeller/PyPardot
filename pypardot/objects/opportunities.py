@@ -13,7 +13,15 @@ class Opportunities(object):
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/opportunities/#supported-search-criteria
         """
         response = self._get(path='/do/query', params=kwargs)
-        return response.get('result')
+
+        # Ensure result['opportunity'] is a list, no matter what.
+        result = response.get('result')
+        if result['total_results'] == 0:
+            result['opportunity'] = []
+        elif result['total_results'] == 1:
+            result['opportunity'] = [result['opportunity']]
+
+        return result
 
     def create_by_email(self, prospect_email=None, name=None, value=None, probability=None, **kwargs):
         """

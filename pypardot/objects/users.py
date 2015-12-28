@@ -13,7 +13,15 @@ class Users(object):
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/users/#supported-search-criteria
         """
         response = self._get(path='/do/query', params=kwargs)
-        return response.get('result')
+
+        # Ensure result['users'] is a list, no matter what.
+        result = response.get('result')
+        if result['total_results'] == 0:
+            result['user'] = []
+        elif result['total_results'] == 1:
+            result['user'] = [result['user']]
+
+        return result
 
     def read_by_id(self, id=None, **kwargs):
         """

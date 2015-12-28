@@ -13,7 +13,15 @@ class Accounts(object):
         Supported search criteria: http://developer.pardot.com/kb/api-version-3/prospect-accounts/#supported-search-criteria
         """
         response = self._get(path='/do/query', params=kwargs)
-        return response.get('result')
+
+        # Ensure result['prospectAccount'] is a list, no matter what.
+        result = response.get('result')
+        if result['total_results'] == 0:
+            result['prospectAccount'] = []
+        elif result['total_results'] == 1:
+            result['prospectAccount'] = [result['prospectAccount']]
+
+        return result
 
     def create(self, **kwargs):
         """Creates a new prospect account."""
