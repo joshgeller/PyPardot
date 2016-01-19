@@ -9,3 +9,6 @@
 
 # Python egg metadata
 *.egg-info
+
+# PyCharm / Jetbrains IDE
+.idea

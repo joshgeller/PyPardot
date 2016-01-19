@@ -1,12 +1,12 @@
 import unittest
 
-from ...client import PardotAPI
-from ...errors import PardotAPIArgumentError, PardotAPIError
+from pypardot.client import PardotAPI
+from pypardot.errors import PardotAPIArgumentError, PardotAPIError
 
 try:
-    from .config import *
+    from pypardot.objects.tests.config import *
     CONFIG_EXISTS = True
-except Exception, e:
+except SystemError as e:
     CONFIG_EXISTS = False
 
 
@@ -23,7 +23,7 @@ class TestProspects(unittest.TestCase):
         # Make sure there isn't an existing prospect in the test account.
         try:
             self.pardot.prospects.delete_by_email(email=self.email_address)
-        except PardotAPIError, e:
+        except PardotAPIError as e:
             # Error code 4 is raised if the prospect doesn't exist.
             if e.err_code != 4:
                 raise e
@@ -31,7 +31,7 @@ class TestProspects(unittest.TestCase):
     def tearDown(self):
         try:
             self.pardot.prospects.delete_by_email(email=self.email_address)
-        except PardotAPIError, e:
+        except PardotAPIError as e:
             # Error code 4 is raised if the prospect doesn't exist.
             if e.err_code != 4:
                 raise e
