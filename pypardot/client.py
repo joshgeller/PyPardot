@@ -1,16 +1,16 @@
 import requests
-from objects.lists import Lists
-from objects.emails import Emails
-from objects.prospects import Prospects
-from objects.opportunities import Opportunities
-from objects.accounts import Accounts
-from objects.users import Users
-from objects.visits import Visits
-from objects.visitors import Visitors
-from objects.visitoractivities import VisitorActivities
-from objects.campaigns import Campaigns
+from .objects.lists import Lists
+from .objects.emails import Emails
+from .objects.prospects import Prospects
+from .objects.opportunities import Opportunities
+from .objects.accounts import Accounts
+from .objects.users import Users
+from .objects.visits import Visits
+from .objects.visitors import Visitors
+from .objects.visitoractivities import VisitorActivities
+from .objects.campaigns import Campaigns
 
-from errors import PardotAPIError
+from .errors import PardotAPIError
 
 # Issue #1 (http://code.google.com/p/pybing/issues/detail?id=1)
 # Python 2.6 has json built in, 2.5 needs simplejson
@@ -53,7 +53,7 @@ class PardotAPI(object):
             request = requests.post(self._full_path(object_name, path), params=params)
             response = self._check_response(request)
             return response
-        except PardotAPIError, err:
+        except PardotAPIError as err:
             if err.message == 'Invalid API key or user key':
                 response = self._handle_expired_api_key(err, retries, 'post', object_name, path, params)
                 return response
@@ -74,7 +74,7 @@ class PardotAPI(object):
             request = requests.get(self._full_path(object_name, path), params=params)
             response = self._check_response(request)
             return response
-        except PardotAPIError, err:
+        except PardotAPIError as err:
             if err.message == 'Invalid API key or user key':
                 response = self._handle_expired_api_key(err, retries, 'get', object_name, path, params)
                 return response
