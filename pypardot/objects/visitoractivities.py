@@ -14,14 +14,14 @@ class VisitorActivities(object):
         """
         response = self._get(path='/do/query', params=kwargs)
 
-        # Ensure result['visitorActivity'] is a list, no matter what.
-        response = response.get('response')
-        if response['total_responses'] == 0:
-            response['visitorActivity'] = []
-        elif response['total_responses'] == 1:
-            response['visitorActivity'] = [response['visitorActivity']]
+        # Ensure result['visitor_activity'] is a list, no matter what.
+        result = response.get('result')
+        if result['total_results'] == 0:
+            result['visitor_activity'] = []
+        elif result['total_results'] == 1:
+            result['visitor_activity'] = [result['visitor_activity']]
 
-        return response
+        return result
 
     def read(self, id=None, **kwargs):
         """
