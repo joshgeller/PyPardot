@@ -1,5 +1,8 @@
 PyPardot
 =========
+
+### Note: I no longer work with Pardot, and therefore cannot maintain this library. If you'd like to take over, let me know!
+
 PyPardot is an API wrapper for [Pardot](http://www.pardot.com/), written in Python.
 
 Using it is simple:
